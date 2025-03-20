@@ -3,6 +3,11 @@ import React, { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { loginUser } from '@/services/auth.service';
 
+interface ApiResponse {
+  data: string,
+  message: string
+}
+
 const LoginPage = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -11,13 +16,13 @@ const LoginPage = () => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    let data = {
+    const data = {
       email, password
     }
-    const res = await loginUser({ data });
+    const res:any = await loginUser({ data });
     console.log(res,'res')
-    if (res.data) {
-      alert("Login success")
+    if (res) {
+      // alert("Login success")
       router.push("/")
     }
     else {

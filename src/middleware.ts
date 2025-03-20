@@ -3,7 +3,6 @@ import type { NextRequest } from 'next/server'
 
 
 export function middleware(request: NextRequest) {
-console.log('first')
     const path = request.nextUrl.pathname
 
     const isPublicPath = path === '/auth/login' || path === '/signup' || path === '/verifyemail'

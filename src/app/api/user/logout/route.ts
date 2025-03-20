@@ -2,7 +2,7 @@
 import { withDb } from "@/utils/withDb";
 import { NextRequest, NextResponse } from "next/server";
 
-export const POST = withDb(async (req: NextRequest) => {
+export const POST = withDb(async () => {
     try {
         // Clear the authentication token cookie
         const response = NextResponse.json({ message: "Logout successful" }, { status: 200 });
@@ -16,7 +16,10 @@ export const POST = withDb(async (req: NextRequest) => {
         });
 
         return response;
-    } catch (error: any) {
-        return NextResponse.json({ message: "Logout failed", error: error.message }, { status: 500 });
+    } catch (error: unknown) {
+        if (error instanceof Error) {
+            return NextResponse.json({ message: "Server error", error: error.message }, { status: 500 });
+        }
+        return NextResponse.json({ message: "Unknown server error" }, { status: 500 });
     }
 });

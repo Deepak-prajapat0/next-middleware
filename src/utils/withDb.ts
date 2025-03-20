@@ -1,12 +1,10 @@
 // lib/withDb.js
 import { connectDb } from "@/db/dbconfig";
-import { RequestHandler } from "next/dist/server/next";
 import { NextRequest, NextResponse } from "next/server";
 
 interface WithDbHandler {
     (req: NextRequest, res: NextResponse): Promise<NextResponse>;
 }
-let isConnected = false; // Track the connection status
 export function withDb(handler: WithDbHandler): WithDbHandler {
     return async (req: NextRequest, res: NextResponse): Promise<NextResponse> => {
         try {

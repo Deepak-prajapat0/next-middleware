@@ -33,7 +33,10 @@ export const POST = withDb(async (req: NextRequest) => {
 
 
         return NextResponse.json(user, { status: 200 });
-    } catch (error:any) {
-        return NextResponse.json({ message: "Server error", error: error.message }, { status: 500 });
+    } catch (error: unknown) {
+        if (error instanceof Error) {
+            return NextResponse.json({ message: "Server error", error: error.message }, { status: 500 });
+        }
+        return NextResponse.json({ message: "Unknown server error" }, { status: 500 });
     }
 });

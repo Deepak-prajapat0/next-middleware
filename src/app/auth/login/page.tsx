@@ -18,6 +18,7 @@ const LoginPage = () => {
     console.log(res,'res')
     if (res.data) {
       alert("Login success")
+      router.push("/")
     }
     else {
      setError(res.message)

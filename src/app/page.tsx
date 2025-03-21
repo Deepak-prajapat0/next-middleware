@@ -5,12 +5,14 @@ import { useRouter } from "next/navigation";
 
 
 export default function Home() {
-const router = useRouter()
-const handleLogout = async()=>{
-  const res = await logoutUser()
-console.log(res)
-  router.push("/auth/login")
-}
+
+  const router = useRouter()
+
+  const handleLogout = async () => {
+    const res = await logoutUser()
+    console.log(res)
+    router.push("/auth/login")
+  }
 
   return (
     <div className="p-4">
